@@ -1,0 +1,1324 @@
+/* Base styles */
+:root {
+  --primary-color: #0a3d7a;
+  --primary-light: #1862b5;
+  --secondary-color: #2a9d8f;
+  --text-color: #21295c;
+  --text-light: #475569;
+  --background-color: #f8fafc;
+  --background-light: #ffffff;
+  --border-color: #e2e8f0;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  background-color: transparent !important; /* Ensure body has a transparent background */
+  overflow-x: hidden;
+  padding-top: 0;
+}
+
+/* Make content sections stand out against the background */
+.header, .section, .card, .hero-content, .footer {
+  position: relative;
+  z-index: 5;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Softer shadow for elegance */
+}
+
+.header {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.hero {
+  background-color: transparent; /* Let the particles show through */
+}
+
+.hero-content {
+  padding: 2rem;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Animation and Transitions */
+.fade-in {
+  opacity: 1; /* Changed from 0 to make initial page load visible */
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation for scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Different animation delay options */
+.delay-200 { transition-delay: 0.2s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-600 { transition-delay: 0.6s; }
+
+/* Different animation types */
+.slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 0.8s ease;
+}
+
+.slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.8s ease;
+}
+
+.slide-left.active, .slide-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade in animation when page loads */
+@keyframes fadeInOnLoad {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-load {
+  animation: fadeInOnLoad 1s ease forwards;
+}
+
+/* Gradient Border */
+.border-gradient {
+  position: relative;
+  border-radius: 8px;
+  background: var(--background-light);
+  padding: 1px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 8px;
+  padding: 2px;
+  background: linear-gradient(45deg, #1862b5, #2a9d8f, #4c6ef5);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+/* Header and Navigation */
+.header {
+  background-color: var(--background-light);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Keep this as sticky, not fixed */
+  top: 0;
+  z-index: 100;
+  width: 100%; /* Ensure it's full width but not expanding beyond */
+  height: auto; /* Let it size naturally based on content */
+  overflow: visible; /* Allow content to be visible */
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between; /* Changed from flex-start to space-between */
+  align-items: center;
+  padding: 1rem 0; /* Slightly reduced padding */
+  flex-wrap: wrap;
+  max-width: 100%; /* Ensure it doesn't overflow */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 1rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.logo-img {
+  height: 40px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: 1rem;
+  margin-right: auto;
+}
+
+.nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--background-light);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(10, 61, 122, 0.05);
+  transform: translateY(-2px);
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.btn-link:hover {
+  color: var(--primary-light);
+  text-decoration: underline;
+}
+
+/* Center the Get Started button and remove underlines */
+
+/* Add/update centered CTA styling */
+.centered-cta {
+  text-align: center;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.centered-cta .btn-large {
+  padding: 1.25rem 3rem;
+  font-size: 1.125rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none; /* Remove underline */
+}
+
+/* Remove underlines from all buttons */
+.btn-primary, .btn-secondary {
+  text-decoration: none !important;
+}
+
+/* Remove underline from View All Scholarships button */
+.text-center .btn-primary {
+  text-decoration: none !important;
+}
+
+/* Add a general no-underline class */
+.no-underline {
+  text-decoration: none !important;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: 6rem 0;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  color: var(--primary-color);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  height: auto; /* Ensure proper aspect ratio */
+  position: static; /* Prevent absolute positioning issues */
+  z-index: 1;
+}
+
+/* Sections */
+.section {
+  padding: 4rem 0;
+}
+
+.bg-light {
+  background-color: #f8fafc;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.section-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* How It Works */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.step {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: var(--background-light);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto 1rem;
+}
+
+.step h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Cards */
+.card {
+  background-color: var(--background-light);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+}
+
+/* Enhanced scholarship card styling without images */
+
+.scholarship-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid var(--primary-color);
+}
+
+.scholarship-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.scholarship-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.scholarship-header h3 {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.scholarship-amount {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--success-color, #2a9d8f);
+  background-color: rgba(42, 157, 143, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.scholarship-info p {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.scholarship-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Interactive Background Styling */
+
+#interactive-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: none;
+  opacity: 0.7; /* Adjust for subtlety */
+}
+
+/* Ensure content containers have proper backgrounds for readability */
+.header, .section, .card, .footer, .hero {
+  position: relative;
+  z-index: 1;
+}
+
+/* Add subtle backdrop blur effect to important content */
+.card, .header, .modal {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* Forms */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(10, 61, 122, 0.1);
+}
+
+/* Scholarship Results */
+.scholarship-item {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem 0;
+}
+
+.scholarship-item:last-child {
+  border-bottom: none;
+}
+
+.scholarship-content {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.scholarship-image {
+  flex-shrink: 0;
+  width: 100px;
+}
+
+.scholarship-image img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.scholarship-info {
+  flex-grow: 1;
+}
+
+.scholarship-info h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.scholarship-amount {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--secondary-color);
+  margin-bottom: 0.25rem;
+}
+
+.scholarship-org {
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+}
+
+.scholarship-deadline {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.scholarship-desc {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.scholarship-status {
+  flex-shrink: 0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.status-applied {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+}
+
+.status-pending {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+/* Featured Scholarships */
+.scholarship-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.scholarship-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid var(--primary-color);
+}
+
+.scholarship-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.scholarship-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.scholarship-header h3 {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.scholarship-amount {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--success-color, #2a9d8f);
+  background-color: rgba(42, 157, 143, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.scholarship-info p {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.scholarship-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* About Section */
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-subtitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem;
+  color: var(--primary-color);
+}
+
+.about-text h3:first-child {
+  margin-top: 0;
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* About page updates */
+.about-summary {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Application Flow Section */
+.full-page-section {
+  min-height: 80vh;
+  padding: 4rem 0;
+}
+
+.application-progress {
+  margin-bottom: 2rem;
+}
+
+.progress-bar {
+  height: 10px;
+  background-color: var(--gray-200);
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+.application-section {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.application-section-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.form-section-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.repeating-form-item {
+  padding: 1rem;
+  background-color: var(--gray-100);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.form-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.form-help-text {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  margin-bottom: 0.5rem;
+}
+
+.word-count {
+  text-align: right;
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  margin-top: 0.25rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+/* Application Success */
+.application-success {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  background-color: var(--success-color);
+  color: white;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  margin: 0 auto 1.5rem;
+}
+
+/* Scholarship Matches */
+.scholarship-matches {
+  margin-top: 2rem;
+}
+
+.scholarship-match-item {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.scholarship-match-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scholarship-match-header h4 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.scholarship-match-content {
+  display: flex;
+  padding: 1.5rem;
+}
+
+.scholarship-match-image {
+  flex: 0 0 100px;
+  margin-right: 1.5rem;
+}
+
+.scholarship-match-image img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.scholarship-match-info {
+  flex: 1;
+}
+
+.scholarship-match-percent {
+  margin-bottom: 0.5rem;
+}
+
+.match-percent {
+  font-weight: bold;
+  color: var(--success-color);
+}
+
+.scholarship-match-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--gray-100);
+  border-top: 1px solid var(--border-color);
+}
+
+.match-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.submit-selections {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 4rem 0 2rem;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-logo {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Keep content left-aligned */
+}
+
+.footer-logo img {
+  height: 40px;
+  margin-bottom: 1rem;
+}
+
+.tagline-text {
+  font-weight: 700; /* Make it bold */
+  font-size: 26px; /* Increase size significantly */
+  color: white;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+  text-align: left; /* Ensure left alignment */
+}
+
+.footer-links {
+  flex: 2 1 600px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start; /* Align items to the top */
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Keep links left-aligned */
+}
+
+.footer-column h4 {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.footer-column a {
+  display: block;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: var(--background-light);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 8px;
+  padding: 2rem;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--gray-500);
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.modal-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.modal-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.modal-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Popup Message */
+.popup-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.popup-icon {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  background-color: var(--success-color);
+  color: white;
+  border-radius: 50%;
+  font-size: 2rem;
+  margin: 0 auto 1rem;
+}
+
+/* Reviews Section */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.review-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.review-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.review-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-name {
+  font-weight: 600;
+  margin: 0;
+}
+
+.review-school {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.review-stars {
+  margin-left: auto;
+  color: #FFB900;
+  font-size: 1.25rem;
+}
+
+.review-content p {
+  font-style: italic;
+  line-height: 1.7;
+}
+
+/* Particle background styling */
+/* Removed particle background that might be covering content */
+#particles-js {
+  display: none !important;
+}
+
+/* Fix any potential full-screen images */
+.hero-image img {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  height: auto; /* Ensure proper aspect ratio */
+  position: static; /* Prevent absolute positioning issues */
+  z-index: 1;
+}
+
+/* Make sure background elements stay in background */
+body::before, body::after {
+  display: none !important;
+}
+
+.background-blob {
+  display: none !important;
+}
+
+/* Fix any potential fixed position elements */
+.fixed-element, .fixed-image, .chatbot-toggle {
+  display: none !important;
+}
+
+/* Ensure the header stays at a reasonable size */
+.header {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+/* Make sure content flows normally */
+#app {
+  overflow: visible;
+}
+
+/* Reset any fullscreen elements */
+.fullscreen, .fullpage {
+  height: auto;
+  min-height: 0;
+  position: static;
+}
+
+/* Ensure body has scrolling */
+body {
+  overflow-y: auto !important;
+}
+
+/* Add styling for success messages */
+
+.success-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  z-index: 1000;
+  max-width: 90%;
+  width: 400px;
+  animation: slideDown 0.3s ease;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.success-icon {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  background-color: var(--success-color, #2a9d8f);
+  color: white;
+  border-radius: 50%;
+  font-size: 2rem;
+  margin: 0 auto 1rem;
+}
+
+@keyframes slideDown {
+  from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+/* Add styling for success message links */
+
+.success-links {
+  margin-top: 1rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.success-links ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+.success-links a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.success-links a:hover {
+  color: var(--primary-light);
+}
+
+/* Special thank you modal styling */
+.thank-you-modal {
+  background-color: var(--background-light);
+  border: 2px solid var(--primary-color);
+  max-width: 550px;
+  text-align: center;
+  animation: fadeInScale 0.5s ease;
+}
+
+.thank-you-title {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.thank-you-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Add these styles to ensure the address fields look good */
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+input[type="text"]::placeholder {
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+/* Ensure proper alignment for multi-row forms */
+.form-grid {
+  align-items: start;
+}
+
+/* Add these styles to your styles.css file */
+
+/* Ensure body has a transparent background */
+body {
+  background-color: transparent !important;
+}
+
+/* Make sure the hexagon background is properly displayed */
+#hexagon-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: auto; /* Allow interactions */
+  display: block !important; /* Force display */
+}
+
+/* Remove any conflicting styles */
+#particles-js, 
+body::before, 
+body::after, 
+.background-blob {
+  display: none !important;
+}
