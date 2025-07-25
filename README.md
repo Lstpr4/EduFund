@@ -7,15 +7,15 @@ An interactive web application that uses AI to match students with scholarships 
 - AI-powered scholarship matching
 - Interactive application process
 - Automated application submissions
-- Beautiful UI with animated hexagon "shooting star" background
 - Responsive design for all devices
 
 ## Technologies Used
 
 - HTML5/CSS3
 - JavaScript
-- Vue.js
-- Canvas for background animations
+- python
+- flask
+  
 
 ## How to Use
 
